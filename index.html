@@ -1,89 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>QuickSpin Laundry</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f7fa;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        header img {
-            height: 60px;
-            vertical-align: middle;
-        }
-        section {
-            padding: 30px;
-        }
-        h2 {
-            color: #333;
-        }
-        .section-content {
-            max-width: 800px;
-            margin: auto;
-        }
-        footer {
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 15px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QuickSpin Laundry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header img {
+      width: 80px;
+      border-radius: 12px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin: 0.5rem 0 0.2rem;
+    }
+    p.tagline {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+    section {
+      padding: 2rem 1rem;
+      max-width: 960px;
+      margin: auto;
+    }
+    h2 {
+      color: #007bff;
+      margin-bottom: 1rem;
+    }
+    ul {
+      padding-left: 1.5rem;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .service-box {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .service-box img {
+      height: 50px;
+      margin-bottom: 0.5rem;
+    }
+    iframe {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    .whatsapp-button {
+      display: inline-block;
+      margin-top: 1rem;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="logo.png" alt="QuickSpin Laundry Logo">
-        <h1>QuickSpin Laundry</h1>
-        <p>Fast. Fresh. Folded.</p>
-    </header>
 
-    <section>
-        <div class="section-content">
-            <h2>About Us</h2>
-            <p>QuickSpin Laundry is your modern solution to hassle-free laundry. We offer reliable, same-day pickup and delivery services in Hyderabad with professional ironing and eco-friendly cleaning methods.</p>
-        </div>
-    </section>
+  <header>
+    <img src="logo.png" alt="QuickSpin Logo">
+    <h1>QuickSpin Laundry</h1>
+    <p class="tagline">Fast. Fresh. Folded.</p>
+  </header>
 
-    <section>
-        <div class="section-content">
-            <h2>Our Services</h2>
-            <ul>
-                <li>Washing & Drying (Regular, Express)</li>
-                <li>Steam Ironing</li>
-                <li>Pickup & Delivery</li>
-                <li>Subscription Packages</li>
-                <li>Stain Removal</li>
-                <li>Delicate Wear Handling</li>
-            </ul>
-        </div>
-    </section>
+  <section>
+    <h2>About Us</h2>
+    <p>QuickSpin Laundry is your modern laundry partner in Hyderabad. We provide professional laundry and ironing services with free doorstep pickup & delivery. Our services are eco-friendly, affordable, and lightning fast.</p>
+  </section>
 
-    <section>
-        <div class="section-content">
-            <h2>Why Choose Us?</h2>
-            <p>What sets us apart? Our speed, quality, and customer service. With transparent pricing and smart scheduling, we make laundry effortless for busy urban lifestyles in Hyderabad.</p>
-        </div>
-    </section>
+  <section>
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-box">
+        <img src="https://img.icons8.com/color/96/laundry.png" alt="Wash & Fold"/>
+        <h3>Wash & Fold</h3>
+        <p>Perfect for your everyday clothes. Fresh, clean, and folded neatly.</p>
+      </div>
+      <div class="service-box">
+        <img src="https://img.icons8.com/color/96/ironing.png" alt="Ironing"/>
+        <h3>Steam Ironing</h3>
+        <p>Get wrinkle-free clothes with professional steam pressing.</p>
+      </div>
+      <div class="service-box">
+        <img src="https://img.icons8.com/color/96/delivery.png" alt="Pickup & Delivery"/>
+        <h3>Pickup & Delivery</h3>
+        <p>Schedule pickups via WhatsApp and get your clothes delivered on time!</p>
+      </div>
+      <div class="service-box">
+        <img src="https://img.icons8.com/color/96/clothes-in-washer.png" alt="Stain Removal"/>
+        <h3>Stain Removal</h3>
+        <p>Advanced treatment for tough stains using safe chemicals.</p>
+      </div>
+    </div>
+  </section>
 
-    <section>
-        <div class="section-content">
-            <h2>Contact</h2>
-            <p>📞 Call or WhatsApp: <a href="https://wa.me/919999999999">+91 99999 99999</a><br>
-            📍 Hyderabad, Telangana<br>
-            📧 Email: quickspinlaundry@example.com</p>
-        </div>
-    </section>
+  <section>
+    <h2>Pricing</h2>
+    <ul>
+      <li>👕 Wash & Fold: ₹60/kg</li>
+      <li>👔 Ironing: ₹10/item</li>
+      <li>👗 Premium Wash (delicates): ₹100/kg</li>
+      <li>📦 Monthly Packages: Starting ₹499</li>
+    </ul>
+  </section>
 
-    <footer>
-        <p>&copy; 2025 QuickSpin Laundry. All rights reserved.</p>
-    </footer>
+  <section>
+    <h2>Booking Form</h2>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdzTfQm3RcsXLv6eNEhjbZGqzGmKhLsRh4Vp6Twgby9IfTDxg/viewform?embedded=true" height="600">Loading…</iframe>
+  </section>
+
+  <section>
+    <h2>Our Location</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.125059402956!2d78.48668301435932!3d17.43746330603057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb977269fa41f3%3A0x4899f80743cdbb18!2sHyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1679637493270" height="400" allowfullscreen="" loading="lazy"></iframe>
+  </section>
+
+  <section>
+    <h2>Contact Us</h2>
+    <p>📞 +91 99999 99999<br/>
+    📧 quickspinlaundry@example.com</p>
+    <a class="whatsapp-button" href="https://wa.me/919999999999" target="_blank">Book via WhatsApp</a>
+  </section>
+
+  <footer>
+    &copy; 2025 QuickSpin Laundry. Made fresh in Hyderabad 🧼
+  </footer>
+
 </body>
 </html>
