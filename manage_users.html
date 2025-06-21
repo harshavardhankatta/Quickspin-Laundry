@@ -1,0 +1,35 @@
+<!-- templates/manage_users.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manage Users</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 p-6">
+  <h1 class="text-2xl font-bold mb-4">All Registered Users</h1>
+  <table class="min-w-full bg-white shadow rounded">
+    <thead class="bg-gray-200 text-gray-600 uppercase text-sm">
+      <tr>
+        <th class="py-2 px-4">ID</th>
+        <th class="py-2 px-4">Name</th>
+        <th class="py-2 px-4">Email</th>
+        <th class="py-2 px-4">Phone</th>
+        <th class="py-2 px-4">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr class="border-t">
+        <td class="py-2 px-4">{{ user.id }}</td>
+        <td class="py-2 px-4">{{ user.name }}</td>
+        <td class="py-2 px-4">{{ user.email }}</td>
+        <td class="py-2 px-4">{{ user.phone }}</td>
+        <td class="py-2 px-4">{{ user.role }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

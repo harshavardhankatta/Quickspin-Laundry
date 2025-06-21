@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpinMate - Order History</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen py-6">
+  <div class="container mx-auto px-4">
+    <h1 class="text-2xl font-bold text-center mb-6">Your Order History</h1>
+
+    {% if orders %}
+      <div class="grid gap-4">
+        {% for order in orders %}
+          <div class="bg-white p-4 rounded shadow">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="text-lg font-semibold">Order #{{ order.id }}</p>
+                <p class="text-sm text-gray-600">Service: {{ order.service }}</p>
+                <p class="text-sm text-gray-600">Date: {{ order.pickup_time.strftime('%Y-%m-%d') }}</p>
+                <p class="text-sm text-gray-600">Status: <span class="font-semibold">{{ order.status }}</span></p>
+              </div>
+              <div class="text-right space-y-1">
+                <a href="{{ url_for('download_invoice', order_id=order.id) }}" class="text-blue-600 hover:underline">Download Invoice</a><br>
+                <a href="{{ url_for('track_order', order_id=order.id) }}" class="text-green-600 hover:underline">Track Order</a>
+                <a href="{{ url_for('reorder', order_id=order.id) }}" class="text-olive-600 hover:underline">Reorder</a>
+              </div>
+            </div>
+            {% if order.rating %}
+              <p class="mt-2 text-sm text-gray-700">Rated: {{ order.rating }}/5</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-center text-gray-600">You have no past orders yet.</p>
+    {% endif %}
+
+    <div class="mt-6 text-center">
+      <a href="{{ url_for('customer_dashboard') }}" class="text-blue-600 hover:underline">Back to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>

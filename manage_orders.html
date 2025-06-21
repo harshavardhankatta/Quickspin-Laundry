@@ -1,0 +1,57 @@
+<!-- templates/manage_orders.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manage Orders</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 p-6">
+  <h1 class="text-2xl font-bold mb-4">All Orders</h1>
+  <table class="min-w-full bg-white shadow rounded">
+    <thead class="bg-gray-200 text-gray-600 uppercase text-sm">
+      <tr>
+        <th class="py-2 px-4">Order ID</th>
+        <th class="py-2 px-4">Service</th>
+        <th class="py-2 px-4">Status</th>
+        <th class="py-2 px-4">Customer</th>
+        <th class="py-2 px-4">Pickup Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr class="border-t">
+        <td class="py-2 px-4">{{ order.id }}</td>
+        <td class="py-2 px-4">{{ order.service }}</td>
+        <td class="py-2 px-4">{{ order.status }}</td>
+        <td class="py-2 px-4">{{ order.customer.name }}</td>
+        <td class="py-2 px-4">{{ order.pickup_time.strftime('%Y-%m-%d %H:%M') }}</td>
+        <td>
+        <select name="executive_id" required>
+    <option value="">Assign Executive</option>
+    {% for executive in executives %}
+        <option value="{{ executive.id }}">{{ executive.name }} ({{ executive.email }})</option>
+    {% endfor %}
+</select>
+    <form method="POST" action="{{ url_for('assign_executive', order_id=order.id) }}">
+        <select name="executive_id" class="border rounded px-2 py-1 text-sm">
+            <option value="">Assign Executive</option>
+            {% for exec in executives %}
+                <option value="{{ exec.id }}" {% if exec.id == order.executive_id %}selected{% endif %}>
+                    {{ exec.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="bg-blue-500 text-white text-xs px-2 py-1 rounded mt-1">
+            Assign
+        </button>
+    </form>
+</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

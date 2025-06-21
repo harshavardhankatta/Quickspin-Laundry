@@ -1,0 +1,50 @@
+<!-- templates/manage_coupons.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Coupons - SpinMate Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Manage Coupons</h1>
+    <a href="{{ url_for('admin_dashboard') }}">← Back to Dashboard</a>
+
+    <h2>Create New Coupon</h2>
+    <form method="POST">
+        <label for="code">Coupon Code:</label>
+        <input type="text" name="code" required>
+
+        <label for="discount">Discount (e.g., 0.10 for 10%):</label>
+        <input type="number" name="discount" step="0.01" required>
+
+        <label for="expiry">Expiry Date:</label>
+        <input type="date" name="expiry" required>
+
+        <button type="submit">Add Coupon</button>
+    </form>
+
+    <h2>Existing Coupons</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Code</th>
+                <th>Discount</th>
+                <th>Expiry Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for coupon in coupons %}
+            <tr>
+                <td>{{ coupon.id }}</td>
+                <td>{{ coupon.code }}</td>
+                <td>{{ coupon.discount * 100 }}%</td>
+                <td>{{ coupon.expiry_date.strftime('%Y-%m-%d') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

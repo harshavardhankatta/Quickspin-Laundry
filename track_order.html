@@ -1,0 +1,63 @@
+<!-- templates/track_order.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Track Order - SpinMate</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .tracker {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f1f1f1;
+        }
+        .step.active {
+            background-color: #d1f7c4;
+            font-weight: bold;
+        }
+        .emoji {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h2>🧭 Tracking Order #{{ order.id }}</h2>
+    <p>Service: {{ order.service }}</p>
+    <p>Pickup Time: {{ order.pickup_time.strftime('%Y-%m-%d %H:%M') }}</p>
+    {% if order.delivery_time %}
+    <p>Delivered On: {{ order.delivery_time.strftime('%Y-%m-%d %H:%M') }}</p>
+    {% endif %}
+
+    <div class="tracker">
+        {% set steps = [
+            ('Accepted', '✅', 'Order Accepted'),
+            ('Assigned', '🚶', 'Assigned to Delivery Executive'),
+            ('Picked', '📦', 'Picked up from Customer'),
+            ('Washed', '🧺', 'Washing Done'),
+            ('Dried', '💨', 'Drying Done'),
+            ('Ironed', '👕', 'Ironing Done'),
+            ('Packed', '📦', 'Packed and Ready'),
+            ('Out for Delivery', '🚚', 'Out for Delivery'),
+            ('Delivered', '🎉', 'Delivered')
+        ] %}
+
+        {% for step, icon, label in steps %}
+            <div class="step {% if order.status == step or order.status in steps|map(attribute=0)|select('equalto', step)|list[:steps.index((step, icon, label))] %}active{% endif %}">
+                <div class="emoji">{{ icon }}</div>
+                <div>{{ label }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="{{ url_for('customer_panel') }}">🔙 Back to Dashboard</a>
+</body>
+</html>

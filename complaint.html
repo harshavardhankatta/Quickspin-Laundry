@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpinMate - Raise Complaint</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen py-6">
+  <div class="container mx-auto px-4 max-w-xl">
+    <h1 class="text-2xl font-bold text-center mb-6">Raise a Complaint</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="mb-4">
+          {% for message in messages %}
+            <div class="bg-green-100 text-green-800 p-2 rounded mb-2">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('file_complaint') }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-xl shadow space-y-4">
+      <div>
+        <label for="order_id" class="block font-semibold">Select Order</label>
+        <select name="order_id" id="order_id" required class="w-full border rounded px-3 py-2">
+          <option value="">-- Select Order --</option>
+          {% for order in user_orders %}
+            <option value="{{ order.id }}">#{{ order.id }} - {{ order.service }} ({{ order.status }})</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div>
+        <label for="issue" class="block font-semibold">Issue Description</label>
+        <textarea name="issue" id="issue" rows="4" required class="w-full border rounded px-3 py-2"></textarea>
+      </div>
+
+      <div>
+        <label for="photo" class="block font-semibold">Upload Image (optional)</label>
+        <input type="file" name="photo" id="photo" accept="image/*" class="w-full">
+      </div>
+
+      <button type="submit" class="w-full bg-olive-600 hover:bg-olive-700 text-white py-2 rounded font-semibold">Submit Complaint</button>
+    </form>
+
+    <div class="mt-4 text-center">
+      <a href="{{ url_for('customer_dashboard') }}" class="text-blue-600 hover:underline">Back to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>

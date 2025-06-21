@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - SpinMate</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="max-w-5xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-xl">
+        <h1 class="text-3xl font-bold mb-6 text-center">Admin Dashboard</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Users -->
+            <div class="border rounded-lg p-6 shadow-sm bg-gray-50">
+                <h3 class="text-xl font-semibold mb-2">Manage Users</h3>
+                <p>Total Users: {{ users | length }}</p>
+                <a href="{{ url_for('manage_users') }}" class="text-blue-600 underline mt-2 inline-block">View / Edit Users</a>
+            </div>
+
+            <!-- Orders -->
+            <div class="border rounded-lg p-6 shadow-sm bg-gray-50">
+                <h3 class="text-xl font-semibold mb-2">Manage Orders</h3>
+                <p>Total Orders: {{ orders | length }}</p>
+                <a href="{{ url_for('manage_orders') }}" class="text-blue-600 underline mt-2 inline-block">View / Edit / Delete Orders</a>
+            </div>
+
+            <!-- Complaints -->
+            <div class="border rounded-lg p-6 shadow-sm bg-gray-50">
+                <h3 class="text-xl font-semibold mb-2">Manage Complaints</h3>
+                <p>Total Complaints: {{ complaints | length }}</p>
+                <a href="{{ url_for('manage_complaints') }}" class="text-blue-600 underline mt-2 inline-block">Resolve Complaints</a>
+            </div>
+
+            <!-- Coupons -->
+            <div class="border rounded-lg p-6 shadow-sm bg-gray-50">
+                <h3 class="text-xl font-semibold mb-2">Manage Coupons</h3>
+                <p>Total Coupons: {{ coupons | length }}</p>
+                <a href="{{ url_for('manage_coupons') }}" class="text-blue-600 underline mt-2 inline-block">Add / Remove Coupons</a>
+            </div>
+
+            <!-- Services -->
+            <div class="border rounded-lg p-6 shadow-sm bg-gray-50">
+                <h3 class="text-xl font-semibold mb-2">Manage Services</h3>
+                <a href="{{ url_for('manage_services') }}" class="text-blue-600 underline mt-2 inline-block">Add / Edit Service Types</a>
+            </div>
+
+            <!-- Pincodes -->
+            <div class="border rounded-lg p-6 shadow-sm bg-gray-50">
+                <h3 class="text-xl font-semibold mb-2">Manage Serviceable Pincodes</h3>
+                <a href="{{ url_for('manage_pincodes') }}" class="text-blue-600 underline mt-2 inline-block">Add / Remove Pincodes</a>
+            </div>
+
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="{{ url_for('logout') }}" class="text-red-500 underline">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

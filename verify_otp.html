@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpinMate - Verify OTP</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">OTP Verification</h2>
+    <p class="text-sm text-gray-600 text-center mb-4">
+      Please check your email for the OTP code. Enter it below to login.
+    </p>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="mb-4">
+          {% for message in messages %}
+            <div class="bg-red-100 text-red-700 p-2 rounded mb-2">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('verify_otp', user_id=user.id) }}" method="POST" class="space-y-4">
+      <div>
+        <label for="otp" class="block text-gray-700">Enter OTP</label>
+        <input type="text" name="otp" id="otp" maxlength="6" pattern="\d{6}" required
+               class="mt-1 block w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-olive-500" />
+      </div>
+      <button type="submit"
+              class="w-full bg-olive-600 hover:bg-olive-700 text-white font-semibold py-2 rounded-lg transition duration-200">Verify OTP</button>
+    </form>
+    <p class="mt-4 text-center text-gray-600">
+      <a href="{{ url_for('login') }}" class="text-olive-600 hover:underline">Back to Login</a>
+    </p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpinMate - Customer Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto px-4 py-6">
+    <h1 class="text-3xl font-bold text-center mb-6">Welcome, {{ current_user.name }}</h1>
+
+    <div class="flex justify-between mb-4">
+      <a href="{{ url_for('place_order') }}" class="bg-olive-600 hover:bg-olive-700 text-white px-4 py-2 rounded">+ New Order</a>
+      <a href="{{ url_for('logout') }}" class="text-red-500 hover:underline">Logout</a>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="mb-4">
+          {% for message in messages %}
+            <div class="bg-green-100 text-green-800 p-2 rounded mb-2">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <h2 class="text-xl font-semibold mb-2">Your Orders</h2>
+    <div class="grid gap-4">
+      {% for order in orders %}
+        <div class="bg-white p-4 rounded shadow">
+          <div class="flex justify-between">
+            <div>
+              <p class="text-lg font-semibold">{{ order.service }}</p>
+              <p class="text-gray-600 text-sm">Pickup: {{ order.pickup_time.strftime('%Y-%m-%d %H:%M') }}</p>
+              <p class="text-gray-600 text-sm">Status: <span class="font-semibold">{{ order.status }}</span></p>
+            </div>
+            <div class="space-y-2 text-right">
+              <a href="{{ url_for('track_order', order_id=order.id) }}" class="text-blue-600 hover:underline">Track</a><br>
+              <a href="{{ url_for('reorder', order_id=order.id) }}" class="text-green-600 hover:underline">Reorder</a><br>
+              <a href="{{ url_for('file_complaint', order_id=order.id) }}" class="text-yellow-600 hover:underline">Complaint</a><br>
+              {% if order.status != 'Delivered' %}
+                <a href="{{ url_for('cancel_order', order_id=order.id) }}" class="text-red-600 hover:underline">Cancel</a>
+              {% endif %}
+            </div>
+          </div>
+          {% if order.rating %}
+            <p class="mt-2 text-sm text-gray-700">Rated: {{ order.rating }}/5</p>
+          {% endif %}
+        </div>
+      {% else %}
+        <p class="text-gray-600">No orders yet. Place one to get started!</p>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>

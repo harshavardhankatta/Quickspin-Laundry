@@ -1,0 +1,40 @@
+<!-- templates/manage_pincodes.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Service Pincodes - SpinMate Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Manage Serviceable Pincodes</h1>
+    <a href="{{ url_for('admin_dashboard') }}">← Back to Dashboard</a>
+
+    <h2>Add New Pincode</h2>
+    <form method="POST">
+        <label for="pincode">Pincode:</label>
+        <input type="text" name="pincode" pattern="\d{6}" title="6-digit pincode" required>
+
+        <button type="submit">Add Pincode</button>
+    </form>
+
+    <h2>Existing Pincodes</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pincode</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for area in pincodes %}
+            <tr>
+                <td>{{ area.id }}</td>
+                <td>{{ area.pincode }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

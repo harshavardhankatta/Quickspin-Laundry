@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpinMate - Executive Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto px-4 py-6">
+    <h1 class="text-3xl font-bold text-center mb-6">Welcome, {{ current_user.name }}</h1>
+
+    <div class="flex justify-between mb-6">
+      <p class="text-lg font-semibold">Assigned Orders</p>
+      <a href="{{ url_for('logout') }}" class="text-red-600 hover:underline">Logout</a>
+    </div>
+
+    <div class="grid gap-4">
+      {% for order in assigned_orders %}
+        <div class="bg-white p-4 rounded shadow flex justify-between items-start">
+          <div>
+            <p><strong>Order ID:</strong> {{ order.id }}</p>
+            <p><strong>Customer:</strong> {{ order.customer_name }}</p>
+            <p><strong>Address:</strong> {{ order.address }}</p>
+            <p><strong>Pickup Time:</strong> {{ order.pickup_time.strftime('%Y-%m-%d %H:%M') }}</p>
+            <p><strong>Status:</strong> {{ order.status }}</p>
+          </div>
+          <div class="space-y-2 text-right">
+            <form action="{{ url_for('mark_status', order_id=order.id) }}" method="POST">
+              <select name="status" class="border px-2 py-1 rounded">
+                <option value="Picked">Picked</option>
+                <option value="In Process">In Process</option>
+                <option value="Delivered">Delivered</option>
+              </select>
+              <button type="submit" class="ml-2 bg-olive-600 text-white px-3 py-1 rounded">Update</button>
+            </form>
+            <form action="{{ url_for('upload_proof', order_id=order.id) }}" method="POST" enctype="multipart/form-data">
+              <input type="file" name="photo" accept="image/*" class="text-sm">
+              <button type="submit" class="mt-1 bg-blue-600 text-white px-2 py-1 rounded">Upload Proof</button>
+            </form>
+            <a href="https://maps.google.com/?q={{ order.address | urlencode }}" target="_blank" class="text-blue-600 underline text-sm">Navigate</a>
+          </div>
+        </div>
+      {% else %}
+        <p class="text-gray-600">No orders assigned yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>

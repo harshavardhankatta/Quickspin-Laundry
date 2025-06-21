@@ -1,0 +1,39 @@
+<!-- templates/manage_complaints.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Complaints - SpinMate Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Manage Complaints</h1>
+    <a href="{{ url_for('admin_dashboard') }}">← Back to Dashboard</a>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Complaint ID</th>
+                <th>User</th>
+                <th>Order ID</th>
+                <th>Text</th>
+                <th>Date</th>
+                <th>Resolved</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for complaint in complaints %}
+            <tr>
+                <td>{{ complaint.id }}</td>
+                <td>{{ complaint.user.name }}</td>
+                <td>{{ complaint.order.id }}</td>
+                <td>{{ complaint.text }}</td>
+                <td>{{ complaint.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>{{ 'Yes' if complaint.resolved else 'No' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

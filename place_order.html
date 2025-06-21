@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Place Laundry Order - SpinMate</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <div class="max-w-2xl mx-auto mt-10 p-8 bg-white shadow-lg rounded-xl">
+        <h2 class="text-2xl font-bold mb-6 text-center">Place Laundry Order</h2>
+
+        <form action="{{ url_for('place_order') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+            
+            <!-- Service selection -->
+            <div>
+                <label for="service" class="block text-sm font-medium text-gray-700">Service</label>
+                <select id="service" name="service" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="">Select a service</option>
+                    <option value="Washing">Washing</option>
+                    <option value="Dry Cleaning">Dry Cleaning</option>
+                    <option value="Ironing">Ironing</option>
+                </select>
+            </div>
+
+            <!-- Pickup Time -->
+            <div>
+                <label for="pickup_time" class="block text-sm font-medium text-gray-700">Pickup Time</label>
+                <input type="datetime-local" name="pickup_time" id="pickup_time" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+            </div>
+
+            <!-- Weight -->
+            <div>
+                <label for="weight" class="block text-sm font-medium text-gray-700">Weight (kg)</label>
+                <input type="number" step="0.1" min="0.1" name="weight" id="weight" required placeholder="e.g., 3.5" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" />
+            </div>
+
+            <!-- Instructions -->
+            <div>
+                <label for="instructions" class="block text-sm font-medium text-gray-700">Special Instructions (optional)</label>
+                <textarea name="instructions" id="instructions" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="Any special handling instructions?"></textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div>
+                <label for="image" class="block text-sm font-medium text-gray-700">Upload Image (optional)</label>
+                <input type="file" name="image" id="image" accept="image/*" class="mt-1 block w-full text-sm text-gray-600 file:py-2 file:px-4 file:border file:rounded file:border-gray-300" />
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition">Place Order</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>
